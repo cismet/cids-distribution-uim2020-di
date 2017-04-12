@@ -10,3 +10,10 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/deployment-uim2020-navigator/target/
+/deployment-uim2020-server/target/
+/deployment-uim2020-server-rest/target/
+/distribution-uim2020-navigator/target/
+/distribution-uim2020-server/target/
+/distribution-uim2020-server-rest/target/
+/target/
