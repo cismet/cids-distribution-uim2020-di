@@ -28,7 +28,7 @@
             Can be overwritten in each module, in nbactions.xml custom builds or from command line 
             with e.g. -DaccountExtension=Belis2
         -->
-        <de.cismet.cidsAccountExtension>Uim2020</de.cismet.cidsAccountExtension>
+        <de.cismet.cidsAccountExtension>UDM2020-di</de.cismet.cidsAccountExtension>
         
         <!--
             Custom build timestamp formet for title and description of JNLP files
@@ -105,12 +105,12 @@
             <dependency>
                 <groupId>de.cismet.cids.custom.udm2020</groupId>
                 <artifactId>cids-custom-udm2020-di-server</artifactId>
-                <version>5.0</version>
+                <version>5.0.2</version>
             </dependency>
             <dependency>
                 <groupId>de.cismet.cids.custom.udm2020</groupId>
                 <artifactId>cids-custom-udm2020-di</artifactId>
-                <version>5.0-SNAPSHOT</version>
+                <version>5.0</version>
             </dependency>
             <dependency>
                 <groupId>de.cismet.cids.navigator</groupId>
@@ -131,6 +131,11 @@
                 <groupId>de.cismet.cids</groupId>
                 <artifactId>cids-server-rest-types</artifactId>
                 <version>5.0-UBA</version>
+            </dependency>
+            <dependency>
+                <groupId>de.cismet.commons</groupId>
+                <artifactId>cids-utils</artifactId>
+                <version>5.0</version>
             </dependency>
             <dependency>
                 <groupId>de.cismet.cismap</groupId>
@@ -194,10 +199,11 @@
         the autodistribution module.
     -->
     <modules>
+        <module>deployment-uim2020-server</module>
         <module>deployment-uim2020-server-rest</module>
         
-        <!--<module>distribution-uim2020-navigator</module>
         <module>distribution-uim2020-server</module>
-        <module>distribution-uim2020-server-rest</module>-->
+        <module>distribution-uim2020-server-rest</module>
+        <module>distribution-uim2020-navigator</module>
     </modules>
 </project>

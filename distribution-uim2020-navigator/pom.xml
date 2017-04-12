@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>de.cismet.cids.custom.switchon.distribution</groupId>
-        <artifactId>switchon-distribution</artifactId>
-        <version>5.1-SNAPSHOT</version>
+        <groupId>de.cismet.cids.custom.udm2020.distribution</groupId>
+        <artifactId>uim2020-distribution</artifactId>
+        <version>5.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
@@ -20,7 +20,11 @@
     <packaging>pom</packaging>
     
     <name>distribution-uim2020-navigator</name>
-    <description>switchon-navigator autodistribution module</description>
+    <description>uim2020-navigator autodistribution module</description>
+    
+    <properties>
+        <mdep.skip>true</mdep.skip>
+    </properties>
 
     <!--
         IMPORTANT: For the cids-maven plugin to work properly there 
@@ -30,10 +34,8 @@
     -->
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>deployment-switchon-navigator</artifactId>
-            <version>${project.version}</version>
-            <type>pom</type>
+            <groupId>de.cismet.cids.custom.udm2020</groupId>
+            <artifactId>cids-custom-udm2020-di</artifactId>
         </dependency>
     </dependencies>
     
@@ -88,6 +90,7 @@
                         IMPORTANT: the cidsDistribution directory. All files will be overwritten!
                     -->
                     <outputDirectory>${de.cismet.cidsDistDir}</outputDirectory>
+                    <!--<outputDirectory>../..</outputDirectory>-->
                     
                     <failOnError>true</failOnError>
                     <verbose>false</verbose>
@@ -105,7 +108,7 @@
                         refer to the JARs copied into the lib/ext and lib/int
                         directories!
                     -->
-                    <classpathFromMavenRepo>false</classpathFromMavenRepo>
+                    <classpathFromMavenRepo>true</classpathFromMavenRepo>
                     
                     <!--
                         if set to true, no client/<accountExtension> directory will
@@ -119,13 +122,13 @@
                     -->
                     <dependencyConfiguration>
                         <dependencyEx>
-                            <groupId>${project.groupId}</groupId>
-                            <artifactId>deployment-switchon-navigator</artifactId>
+                            <groupId>de.cismet.cids.custom.udm2020</groupId>
+                            <artifactId>cids-custom-udm2020-di</artifactId>
                             
                             <!--
                                 Generate a client.JNLP but not starter jars
                             -->
-                            <generateJar>false</generateJar>
+                            <generateJar>true</generateJar>
                             <generateJnlp>true</generateJnlp>
                             
                             <!--
@@ -134,7 +137,7 @@
                                 It will be singed even if <sign> is set to false!
                                 Therefore de.cismet.keystore.* properties mut be set! 
                             -->
-                            <generateSecurityJar>true</generateSecurityJar>
+                            <generateSecurityJar>false</generateSecurityJar>
                             
                             <!--
                                 Confguration of the starter (JAR or JNLP)
@@ -147,23 +150,18 @@
                                     
                                     NOTE: Alias is *not* used for classpath.jnlp!
                                 -->
-                                <starterAlias>switchon-navigator</starterAlias>
+                                <starterAlias>uim2020-navigator</starterAlias>
                                 
-                                <title>SWITCH-ON SIP Expert GUI v${project.version} (${maven.build.timestamp})</title>
+                                <title>UIM2020-DI v${project.version} (${maven.build.timestamp})</title>
                                 <java>
                                     <version>1.7+</version>
                                     <initialHeapSize>512M</initialHeapSize>
-                                    <maximalHeapSize>1024M</maximalHeapSize>
+                                    <maximalHeapSize>2048M</maximalHeapSize>
                                     <jvmArgs>-XX:MaxPermSize=128m</jvmArgs>
                                 </java>
                                 <mainClass>Sirius.navigator.Navigator</mainClass>
-                                <!--
-                                    Arguments must *absolute* (codebase) and must
-                                    match the <accountExtension> (case sensitive!) if <flatClientDirectory>
-                                    is *not* set to false!                                 
-                                -->
                                 <arguments>
-                                    <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}/config/log4j.debug.properties</argument>
+                                    <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}/config/log4j.properties</argument>
                                     <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}/config/navigator.cfg</argument>
                                     <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}</argument>
                                     <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}/plugins</argument>
@@ -171,14 +169,22 @@
                                     <argument>${de.cismet.cidsCodebase}/client/${de.cismet.cidsAccountExtension}/profiles</argument>
                                 </arguments>
                                 
-                                <properties>
+                                 <properties>
                                     <property>
-                                        <name>directory.extension</name>
-                                        <value>Switchon</value>
+                                        <name>jnlp.directory.extension</name>
+                                        <value>${de.cismet.cidsAccountExtension}</value>
                                     </property>
                                     <property>
-                                        <name>user.variant</name>
-                                        <value>switchon</value>
+                                        <name>jnlp.user.language</name>
+                                        <value>de</value>
+                                    </property>
+                                    <property>
+                                        <name>jnlp.user.variant=</name>
+                                        <value>udm2020-di</value>
+                                    </property>
+                                    <property>
+                                        <name>jnlp.user.country</name>
+                                        <value>AT</value>
                                     </property>
                                 </properties>
                                 
@@ -193,7 +199,6 @@
                                     <jarNames>
                                         <jarName>res.jar</jarName>
                                         <jarName>navigatorImages.jar</jarName>
-                                        <jarName>templates.jar</jarName>
                                     </jarNames>
                                 </localConfiguration>
                             </starterConfiguration>
@@ -201,38 +206,6 @@
                     </dependencyConfiguration>
                 </configuration>
             </plugin>
-            
-            <!--
-                Repack xmlbeans  as it contains duplicate classes and will cause webstart to fail!
-                ATTENTION: Set minimizeJar to false to avoid NPE in ShadeMojo.java:546 ?!
-                
-                THIS STEP IS NOT NECESSARY IF REPACKED XMLBEANS-2.6.0.JAR FROM
-                https://github.com/cismet/cids-docker-images/tree/dev/cids-java-maven/lib/
-                HAS BEEN COPIED INTO THE LOCAL MAVEN REPOSITORY! (e.g. in cids distribution 
-                docker images that are based on cismet/cids-docker-images)
-            -->
-<!--        <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <outputFile>${de.cismet.cidsDistDir}/lib/ext/xmlbeans-2.6.0.jar</outputFile>
-                            <minimizeJar>false</minimizeJar>
-                            <artifactSet>
-                                <includes>
-                                    <include>org.apache.xmlbeans:xmlbeans</include>
-                                </includes>
-                            </artifactSet>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
     </build>
 </project>

@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>de.cismet.cids.custom.switchon.distribution</groupId>
-        <artifactId>switchon-distribution</artifactId>
-        <version>5.1-SNAPSHOT</version>
+        <groupId>de.cismet.cids.custom.udm2020.distribution</groupId>
+        <artifactId>uim2020-distribution</artifactId>
+        <version>5.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
@@ -18,7 +18,13 @@
     -->
     <artifactId>distribution-uim2020-server</artifactId>
     <packaging>pom</packaging>
-
+    
+    <name>distribution-uim2020-server</name>
+    
+    <properties>
+        <mdep.skip>true</mdep.skip>
+    </properties>
+    
     <!--
         IMPORTANT: For the cids-maven plugin to work properly there 
         is excatly *one* dependecy to the depolyment module specified!
@@ -28,7 +34,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>deployment-switchon-server</artifactId>
+            <artifactId>deployment-uim2020-server</artifactId>
             <version>${project.version}</version>
             <type>pom</type>
         </dependency>
@@ -70,7 +76,7 @@
                         The global account extension that is used for naming client directories
                         and classpath / starter jars!
                     -->
-                    <accountExtension>Switchon</accountExtension>
+                    <accountExtension>${de.cismet.cidsAccountExtension}</accountExtension>
                     
                     <!--
                         IMPORTANT: the cidsDistribution directory. All files will be overwritten!
@@ -93,7 +99,7 @@
                         refer to the JARs copied into the lib/ext and lib/int
                         directories!
                     -->
-                    <classpathFromMavenRepo>false</classpathFromMavenRepo>
+                    <classpathFromMavenRepo>true</classpathFromMavenRepo>
                     
                     <!--
                         The actual extended dependency configuration for the
@@ -102,7 +108,7 @@
                     <dependencyConfiguration>
                         <dependencyEx>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>deployment-switchon-server</artifactId>
+                            <artifactId>deployment-uim2020-server</artifactId>
                             
                             <!--
                                 Generate a server starter but not starter jars
@@ -114,7 +120,13 @@
                                 Confguration of the starter (JAR or JNLP)
                             -->
                             <starterConfiguration>
-                                <starterAlias>switchon-server</starterAlias>
+                                <starterAlias>uim2020-server</starterAlias>
+                                <localConfiguration>
+                                    <jarNames>
+                                        <jarName>res.jar</jarName>
+                                        <jarName>resources.jar</jarName>
+                                    </jarNames>
+                                </localConfiguration>
                                 <mainClass>de.cismet.cids.admin.serverManagement.HeadlessServerConsole</mainClass>
                             </starterConfiguration>
                         </dependencyEx>
@@ -123,5 +135,4 @@
             </plugin>
         </plugins>
     </build>
-    <name>distribution-uim2020-server</name>
 </project>
