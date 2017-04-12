@@ -159,7 +159,7 @@
             <goal>org.codehaus.mojo:exec-maven-plugin:exec</goal>
         </goals>
         <properties>
-            <exec.args>-Dlog4j.configuration=file:log4j.properties -classpath %classpath de.cismet.cids.admin.serverManagement.HeadlessServerConsole</exec.args>
+            <exec.args>-Dlog4j.configuration=file:log4j.properties -classpath ${de.cismet.cids.classpath} de.cismet.cids.admin.serverManagement.HeadlessServerConsole</exec.args>
             <exec.workingdir>${de.cismet.cids.server.workingDir.uim2020-di}</exec.workingdir>
             <exec.executable>java</exec.executable>
             <mdep.skip>true</mdep.skip>
@@ -167,6 +167,7 @@
             <exec.skip>false</exec.skip>
         </properties>
         <activatedProfiles>
+            <activatedProfile>cismet-dev-exec</activatedProfile>
             <activatedProfile>netbeans-fastbuild</activatedProfile>
         </activatedProfiles>
     </action>
@@ -181,7 +182,7 @@
             <goal>org.codehaus.mojo:exec-maven-plugin:exec</goal>
         </goals>
         <properties>
-            <exec.args>-Dlog4j.configuration=file:log4j.debug.properties -Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath de.cismet.cids.admin.serverManagement.HeadlessServerConsole</exec.args>
+            <exec.args>-Dlog4j.configuration=file:log4j.debug.properties -Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath ${de.cismet.cids.classpath} de.cismet.cids.admin.serverManagement.HeadlessServerConsole</exec.args>
             <exec.workingdir>${de.cismet.cids.server.workingDir.uim2020-di}</exec.workingdir>
             <exec.executable>java</exec.executable>
             <jpda.listen>true</jpda.listen>
@@ -190,6 +191,7 @@
             <exec.skip>false</exec.skip>
         </properties>
         <activatedProfiles>
+            <activatedProfile>cismet-dev-exec</activatedProfile>
             <activatedProfile>netbeans-fastbuild</activatedProfile>
         </activatedProfiles>
     </action>
@@ -204,7 +206,7 @@
             <goal>org.codehaus.mojo:exec-maven-plugin:exec</goal>
         </goals>
         <properties>
-            <exec.args>-Dlog4j.configuration=file:log4j.properties -classpath %classpath de.cismet.cids.admin.serverManagement.HeadlessServerConsole</exec.args>
+            <exec.args>-Dlog4j.configuration=file:log4j.properties -classpath -classpath ${de.cismet.cids.classpath} de.cismet.cids.admin.serverManagement.HeadlessServerConsole</exec.args>
             <exec.workingdir>${de.cismet.cids.server.workingDir.uim2020-di}</exec.workingdir>
             <exec.executable>java</exec.executable>
             <mdep.skip>true</mdep.skip>
@@ -212,6 +214,7 @@
             <exec.skip>false</exec.skip>
         </properties>
         <activatedProfiles>
+            <activatedProfile>cismet-dev-exec</activatedProfile>
             <activatedProfile>netbeans-fastbuild</activatedProfile>
         </activatedProfiles>
     </action>
