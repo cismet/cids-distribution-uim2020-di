@@ -120,7 +120,7 @@
             <dependency>
                 <groupId>de.cismet.cids</groupId>
                 <artifactId>cids-server</artifactId>
-                <version>5.0-UBA</version>
+                <version>5.0.1-UBA</version>
             </dependency>
             <dependency>
                 <groupId>de.cismet.cids</groupId>
