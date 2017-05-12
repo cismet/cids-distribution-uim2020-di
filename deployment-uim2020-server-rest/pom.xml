@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.cismet.cids.custom.udm2020.distribution</groupId>
         <artifactId>uim2020-distribution</artifactId>
-        <version>5.1-SNAPSHOT</version>
+        <version>5.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
