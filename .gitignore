@@ -17,3 +17,7 @@ hs_err_pid*
 /distribution-uim2020-server/target/
 /distribution-uim2020-server-rest/target/
 /target/
+
+# docker host-mounted volumes
+volume/private/*
+volume/ext/*
