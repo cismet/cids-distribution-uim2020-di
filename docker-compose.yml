@@ -46,6 +46,7 @@ services:
     container_name: pgadmin4
     image: dpage/pgadmin4:snapshot
     restart: always
+    network_mode: bridge
     volumes:
       - type: bind
         source: ${CIDSDISTRIBUTION_BASEDIR}/pgadmin4_data

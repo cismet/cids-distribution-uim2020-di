@@ -19,3 +19,6 @@ volume/ext/*
 
 #.env
 /.env
+
+# cidsDistribution data
+/cidsDistribution
