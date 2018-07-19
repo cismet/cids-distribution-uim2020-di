@@ -33,8 +33,11 @@ services:
         source: ${CIDSDISTRIBUTION_BASEDIR}/server
         target: /cidsDistribution/server/
       - type: bind
-        source: ${CIDSDISTRIBUTION_BASEDIR}/lib/localUdm2020-di
-        target: /cidsDistribution/lib/localUdm2020-di
+        source: ${CIDSDISTRIBUTION_BASEDIR}/lib/localUIM2020-di
+        target: /cidsDistribution/lib/localUIM2020-di
+      - type: bind
+        source: ${CIDSDISTRIBUTION_BASEDIR}/lib/localUIM2020-di-rest
+        target: /cidsDistribution/lib/localUIM2020-di-rest
       - type: tmpfs
         target: /tmp
     links:
