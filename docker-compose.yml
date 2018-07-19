@@ -1,0 +1,65 @@
+version: '3.6'
+     
+services:
+  db:
+    container_name: postgis
+    image: cismet/postgis:10.3-2.4-alpine
+    restart: always
+    network_mode: bridge
+    environment:
+      PGUSER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      LANG: de_AT.UTF-8
+      LANGUAGE: de_AT:de
+      LC_ALL: de_AT.UTF-8   
+      TZ: Europe/Vienna
+    volumes:
+      - type: bind
+        source: ${CIDSDISTRIBUTION_BASEDIR}/postgresql_data
+        target: /var/lib/postgresql/data
+      - type: tmpfs
+        target: /tmp
+    ports:
+      - 5433:5432  
+  servers:
+    container_name: cidsDistribution_servers
+    image: ${CIDSDISTRIBUTION_IMAGE_BASE}:${CIDSDISTRIBUTION_IMAGE_TAG}
+    entrypoint: /entrypoint_cids.sh
+    stop_grace_period: 1m0s
+    restart: always
+    network_mode: bridge
+    volumes:
+      - type: bind
+        source: ${CIDSDISTRIBUTION_BASEDIR}/server
+        target: /cidsDistribution/server/
+      - type: bind
+        source: ${CIDSDISTRIBUTION_BASEDIR}/lib/localUIM2020-di
+        target: /cidsDistribution/lib/localUIM2020-di
+      - type: bind
+        source: ${CIDSDISTRIBUTION_BASEDIR}/lib/localUIM2020-di-rest
+        target: /cidsDistribution/lib/localUIM2020-di-rest
+      - type: tmpfs
+        target: /tmp
+    links:
+       - db:db
+    ports:
+    - 9986:9986
+    - 8890:8890
+  pgadmin4:
+    container_name: pgadmin4
+    image: dpage/pgadmin4:snapshot
+    restart: always
+    network_mode: bridge
+    volumes:
+      - type: bind
+        source: ${CIDSDISTRIBUTION_BASEDIR}/pgadmin4_data
+        target: /var/lib/pgadmin/
+      - type: tmpfs
+        target: /tmp  
+    environment:
+       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    links:
+       - db:db
+    ports:
+      - 5050:80

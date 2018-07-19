@@ -28,7 +28,7 @@
             Can be overwritten in each module, in nbactions.xml custom builds or from command line 
             with e.g. -DaccountExtension=Belis2
         -->
-        <de.cismet.cidsAccountExtension>UDM2020-di</de.cismet.cidsAccountExtension>
+        <de.cismet.cidsAccountExtension>UIM2020-di</de.cismet.cidsAccountExtension>
         
         <!--
             Custom build timestamp formet for title and description of JNLP files
