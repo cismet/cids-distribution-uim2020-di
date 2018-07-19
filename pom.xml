@@ -9,7 +9,7 @@
 
     <groupId>de.cismet.cids.custom.udm2020.distribution</groupId>
     <artifactId>uim2020-distribution</artifactId>
-    <version>5.3-SNAPSHOT</version>
+    <version>5.4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>cids-custom UIM2020-DI Distribution</name>
