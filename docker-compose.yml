@@ -2,7 +2,7 @@ version: '3.6'
      
 services:
   db:
-    container_name: postgis
+    container_name: cidsDistribution_postgis
     image: cismet/postgis:10.3-2.4-alpine
     restart: always
     network_mode: bridge
@@ -45,8 +45,15 @@ services:
     ports:
     - 9986:9986
     - 8890:8890
+  nginx:
+    container_name: cidsDistribution_clients
+    image: reg.cismet.de/uba/uim2020-html5-demonstrator:${CLIENT_VERSION}
+    restart: always
+    network_mode: bridge
+    ports:
+        - 80:80
   pgadmin4:
-    container_name: pgadmin4
+    container_name: cidsDistribution_pgadmin4
     image: dpage/pgadmin4:snapshot
     restart: always
     network_mode: bridge
