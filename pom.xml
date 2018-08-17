@@ -4,12 +4,12 @@
     <parent>
         <groupId>de.cismet.cids</groupId>
         <artifactId>cids-distribution-parent</artifactId>
-        <version>5.3</version>
+        <version>5.3.2</version>
     </parent>
 
     <groupId>de.cismet.cids.custom.udm2020.distribution</groupId>
     <artifactId>uim2020-distribution</artifactId>
-    <version>5.4</version>
+    <version>5.4.1</version>
     <packaging>pom</packaging>
 
     <name>cids-custom UIM2020-DI Distribution</name>
@@ -21,7 +21,7 @@
             Can be overwritten in each module, in nbactions.xml custom builds or from command line 
             with e.g. -DaccountExtension=Belis2
         -->
-        <de.cismet.cidsCodebase>http://cismettest1</de.cismet.cidsCodebase>
+        <de.cismet.cidsCodebase>http://uim2020-di-client.cismet.de</de.cismet.cidsCodebase>
         
         <!--
             Default Account Extension (used for starter, classpath and client directories.
@@ -52,7 +52,7 @@
         <connection>scm:git:https://github.com/cismet/cids-distribution-uim2020-di.git</connection>
         <developerConnection>scm:git:git@github.com:cismet/cids-distribution-uim2020-di.git</developerConnection>
         <url>https://github.com/cismet/cids-distribution-uim2020-di</url>
-        <tag>v5.4</tag>
+        <tag>v5.4.1</tag>
     </scm>
     
     <issueManagement>
@@ -181,11 +181,6 @@
                 <groupId>de.cismet</groupId>
                 <artifactId>jcommander</artifactId>
                 <version>5.0</version>
-            </dependency>
-            <dependency>
-                <groupId>de.cismet.commons</groupId>
-                <artifactId>oracle-11g-geometry-factory</artifactId>
-                <version>5.0.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

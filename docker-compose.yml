@@ -1,8 +1,20 @@
 version: '3.6'
      
 services:
+  nginx-proxy:
+    container_name: ${COMPOSE_PROJECT_NAME}-proxy
+    image: jwilder/nginx-proxy
+    restart: always
+    depends_on:
+      - servers
+      - clients
+    network_mode: bridge
+    ports:
+        - "80:80"
+    volumes:
+        - /var/run/docker.sock:/tmp/docker.sock:ro
   db:
-    container_name: cidsDistribution_postgis
+    container_name: ${COMPOSE_PROJECT_NAME}-postgis
     image: cismet/postgis:10.3-2.4-alpine
     restart: always
     network_mode: bridge
@@ -22,12 +34,17 @@ services:
     ports:
       - 5433:5432  
   servers:
-    container_name: cidsDistribution_servers
+    container_name: ${COMPOSE_PROJECT_NAME}-servers
     image: ${CIDSDISTRIBUTION_IMAGE_BASE}:${CIDSDISTRIBUTION_IMAGE_TAG}
     entrypoint: /entrypoint_cids.sh
     stop_grace_period: 1m0s
     restart: always
+    depends_on:
+      - db
     network_mode: bridge
+    environment:
+        VIRTUAL_HOST: ${CIDS_SERVER_DOMAINNAME}
+        VIRTUAL_PORT: 8890
     volumes:
       - type: bind
         source: ${CIDSDISTRIBUTION_BASEDIR}/server
@@ -42,20 +59,26 @@ services:
         target: /tmp
     links:
        - db:db
-    ports:
-    - 9986:9986
-    - 8890:8890
-  nginx:
-    container_name: cidsDistribution_clients
+    #ports:
+    #- 9986:9986
+    #- 8890:8890
+  clients:
+    container_name: ${COMPOSE_PROJECT_NAME}-clients
     image: reg.cismet.de/uba/uim2020-html5-demonstrator:${CLIENT_VERSION}
     restart: always
+    depends_on:
+      - servers
     network_mode: bridge
-    ports:
-        - 80:80
+    environment:
+        VIRTUAL_HOST: ${CIDS_CLIENT_DOMAINNAME}
+    # ports:
+    # - 80:80
   pgadmin4:
-    container_name: cidsDistribution_pgadmin4
+    container_name: ${COMPOSE_PROJECT_NAME}-pgadmin4
     image: dpage/pgadmin4:snapshot
     restart: always
+    depends_on:
+      - db
     network_mode: bridge
     volumes:
       - type: bind

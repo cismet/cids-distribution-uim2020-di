@@ -4,7 +4,7 @@
     <parent>
         <groupId>de.cismet.cids.custom.udm2020.distribution</groupId>
         <artifactId>uim2020-distribution</artifactId>
-        <version>5.4</version>
+        <version>5.4.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
@@ -72,7 +72,7 @@
                 -->
                 <configuration>
                     <vendor>cismet</vendor>
-                    <homepage>http://www.cismet.de</homepage>
+                    <homepage>https://www.cismet.de</homepage>
                     <codebase>${de.cismet.cidsCodebase}</codebase>
                     <!--
                         maven libs dir relative to codebase. Only required, if
@@ -180,7 +180,7 @@
                                     </property>
                                     <property>
                                         <name>jnlp.user.variant=</name>
-                                        <value>udm2020-di</value>
+                                        <value>uim2020-di</value>
                                     </property>
                                     <property>
                                         <name>jnlp.user.country</name>
